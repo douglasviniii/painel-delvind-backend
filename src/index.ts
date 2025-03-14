@@ -22,8 +22,19 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 app.use(cors());
 
+const allowedOrigins = [
+  'https://painel-delvind-frontend-9483ly5x1.vercel.app',
+  'https://painel-delvind-frontend-9483ly5x1-delvind1.vercel.app'
+];
+
 app.use(cors({
-  origin: 'https://painel-delvind-frontend-9483ly5x1.vercel.app'
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
 }));
 
 app.use('/employee', EmployeeRoute); //colaborador
