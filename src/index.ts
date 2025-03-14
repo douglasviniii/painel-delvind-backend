@@ -24,7 +24,7 @@ app.use(cors());
 
 app.use(
     cors({
-      origin: "https://painel-delvind-frontend.onrender.com", // Permite apenas esse domínio
+      origin: "https://painel-delvind-frontend-9483ly5x1-delvind1.vercel.app", // Permite apenas esse domínio
       methods: ["GET", "POST", "PUT", "DELETE", "PATCH"], // Métodos permitidos
       allowedHeaders: ["Content-Type", "Authorization"], // Cabeçalhos permitidos
       credentials: true, // Se precisar enviar cookies ou autenticação
