@@ -25,20 +25,22 @@ const Auth = async (req: Request, res: Response) => {
 
         const user = await EmplyeeService.Login(email);
 
-        if (!user) {
-            res.status(401).json({message: 'User not found'});
+         if (!user) {
+            res.status(401).json({ message: 'User not found' }); 
+            return;
         }
 
         if(password != user!.password){
-            res.status(401).json({message: 'Invalid password'});
-        }
+            res.status(401).json({ message: 'Invalid password' });
+            return;
+        } 
 
         const token = await EmplyeeService.Generatetoken(user!.id);
         const employee = await EmplyeeService.FindEmployee(email);
         
-        res.status(200).json({token, employee});
+        res.status(200).json({ token, employee }); 
     } catch (error) {
-        res.status(500).json({message: 'Internal server error',error});
+        res.status(500).json({ message: 'Internal server error', error });
     }
 }
 

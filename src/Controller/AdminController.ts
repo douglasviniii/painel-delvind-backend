@@ -18,10 +18,12 @@ const Auth = async (req: Request, res: Response) => {
 
         if (!user) {
             res.status(401).json({message: 'User not found'});
+            return;
         }
 
         if(password != user!.password){
             res.status(401).json({message: 'Invalid password'});
+            return;
         }
 
         const token = await AdminService.Generatetoken(user!.id);
