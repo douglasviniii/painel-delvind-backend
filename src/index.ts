@@ -22,6 +22,15 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 app.use(cors());
 
+app.use(
+    cors({
+      origin: "https://painel-delvind-frontend.onrender.com", // Permite apenas esse domínio
+      methods: ["GET", "POST", "PUT", "DELETE", "PATCH"], // Métodos permitidos
+      allowedHeaders: ["Content-Type", "Authorization"], // Cabeçalhos permitidos
+      credentials: true, // Se precisar enviar cookies ou autenticação
+    })
+);
+
 app.use('/employee', EmployeeRoute); //colaborador
 app.use('/admin', AdminRoute); //administrativo
 app.use('/reportemployee', ReportEmployeeRoute); //relatorio do colaborador
