@@ -22,14 +22,9 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 app.use(cors());
 
-app.use(
-    cors({
-      origin: "https://painel-delvind-frontend-9483ly5x1-delvind1.vercel.app", // Permite apenas esse domínio
-      methods: ["GET", "POST", "PUT", "DELETE", "PATCH"], // Métodos permitidos
-      allowedHeaders: ["Content-Type", "Authorization"], // Cabeçalhos permitidos
-      credentials: true, // Se precisar enviar cookies ou autenticação
-    })
-);
+app.use(cors({
+  origin: 'https://painel-delvind-frontend-9483ly5x1.vercel.app'
+}));
 
 app.use('/employee', EmployeeRoute); //colaborador
 app.use('/admin', AdminRoute); //administrativo
