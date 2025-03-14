@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import Database from './DataBase/DataBase';
 import cors from 'cors';
+import path from 'path';
 
 import EmployeeRoute from './Routes/EmployeeRoute';
 import AdminRoute from './Routes/AdminRoute';
@@ -18,6 +19,12 @@ dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
+
+app.use(express.static(path.join(__dirname, 'dist')));
+
+app.all('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'dist', 'index.html'));
+});
 
 app.use(express.json());
 
