@@ -26,8 +26,15 @@ const CreateTask = async (req: CustomRequest, res: Response) => {
 const FindByIdTask = async (req: CustomRequest, res: Response) => {
     try {
         const id = req.userid;
-        const task = await TaskService.FindById(id!);
+
+        if(!id){
+            res.send(404).send({message: 'Not user'});
+            return;      
+        }
+
+        const task = await TaskService.FindById(id);
         res.status(200).send(task);
+        
     } catch (error) {
         res.status(500).send({message: "Internal server error",error});
     }
