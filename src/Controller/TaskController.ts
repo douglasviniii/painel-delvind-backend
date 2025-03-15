@@ -28,13 +28,13 @@ const FindByIdTask = async (req: CustomRequest, res: Response) => {
         const id = req.userid;
 
         if(!id){
-            res.send(404).send({message: 'Not user'});
+            res.send(404).send({message: 'id null'});
             return;      
         }
 
         const task = await TaskService.FindById(id);
         res.status(200).send(task);
-        
+
     } catch (error) {
         res.status(500).send({message: "Internal server error",error});
     }
@@ -43,7 +43,13 @@ const FindByIdTask = async (req: CustomRequest, res: Response) => {
 const FindTaskAdmin = async (req: CustomRequest, res: Response) => {
     try {
         const id = `${process.env.ID_ADMIN}`;
-        const tasks = await TaskService.FindByIdAdmin(id!);
+
+        if(!id){
+            res.send(404).send({message: 'id null'});
+            return;      
+        }
+
+        const tasks = await TaskService.FindByIdAdmin(id);
         res.status(200).send(tasks);
     } catch (error) {
         res.status(500).send({message: "Internal server error",error});
@@ -53,7 +59,13 @@ const FindTaskAdmin = async (req: CustomRequest, res: Response) => {
 const FindTaskMembers = async (req: CustomRequest, res: Response) => {
     try {
         const id = req.userid;
-        const tasks = await TaskService.FindByIdInMembers(id!);
+
+        if(!id){
+            res.send(404).send({message: 'id null'});
+            return;      
+        }
+
+        const tasks = await TaskService.FindByIdInMembers(id);
         res.status(200).send(tasks);
     } catch (error) {
         res.status(500).send({message: "Internal server error",error});
@@ -63,11 +75,6 @@ const FindTaskMembers = async (req: CustomRequest, res: Response) => {
 const CreateTaskAdmin = async (req: CustomRequest, res: Response) => {
     try {
         const {title, description,date,members} = req.body;
-
-/*         const date = new Date();
-        const formattedDate = date.toLocaleString("pt-BR", { 
-            timeZone: "America/Sao_Paulo"
-        }); */
 
         await TaskService.Create({
             admin_id: `${process.env.ID_ADMIN}`,

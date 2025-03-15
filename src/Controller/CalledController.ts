@@ -32,7 +32,13 @@ const CreateCalled = async (req: CustomRequest, res: Response) => {
 const FindById = async (req: CustomRequest, res: Response) => {
     try {
         const id = req.userid;
-        res.status(200).send(await CalledService.FindById(id!));
+
+        if(!id){
+            res.send(404).send({message: 'id null'});
+            return;      
+        }
+
+        res.status(200).send(await CalledService.FindById(id));
     } catch (error) {
         res.status(500).send({message: "Internal server error",error});
     }
@@ -41,7 +47,13 @@ const FindById = async (req: CustomRequest, res: Response) => {
 const FindByIdAdmin = async (req: CustomRequest, res: Response) => {
     try {
         const id = `${process.env.ID_ADMIN}`;
-        res.status(200).send(await CalledService.FindByIdAdmin(id!));
+
+        if(!id){
+            res.send(404).send({message: 'id null'});
+            return;      
+        }
+
+        res.status(200).send(await CalledService.FindByIdAdmin(id));
     } catch (error) {
         res.status(500).send({message: "Internal server error",error});
     }

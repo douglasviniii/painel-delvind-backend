@@ -31,7 +31,13 @@ const Create = async (req: Request, res: Response) => {
 const FindById = async (req: CustomRequest, res: Response) => {
     try {
         const id = req.userid;
-        res.status(200).send(await NotificationsService.FindById(id!));
+
+        if(!id){
+            res.send(404).send({message: 'id null'});
+            return;      
+        }
+
+        res.status(200).send(await NotificationsService.FindById(id));
     } catch (error) {
         res.status(500).send({message: "Internal server error",error});
     }

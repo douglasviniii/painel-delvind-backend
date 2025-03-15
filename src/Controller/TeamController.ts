@@ -38,7 +38,13 @@ const FindTeam = async (req: Request, res: Response) => {
 const FindByIdTeam = async (req: CustomRequest, res: Response) => {
     try {
         const id = req.userid;
-        const Team = await TeamService.FindById(id!);
+
+        if(!id){
+            res.send(404).send({message: 'id null'});
+            return;      
+        }
+
+        const Team = await TeamService.FindById(id);
         res.status(200).send(Team);
         
     } catch (error) {

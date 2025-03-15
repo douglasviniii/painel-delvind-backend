@@ -43,7 +43,13 @@ const SendReportEmployee = async (req: CustomRequest, res: Response) => {
 const ReportEmployeeFindById = async (req: CustomRequest, res: Response) => {
     try {
         const id = req.userid;
-        res.status(200).send(await ReportEmployeeService.FindById(id!));
+
+        if(!id){
+            res.send(404).send({message: 'id null'});
+            return;      
+        }
+
+        res.status(200).send(await ReportEmployeeService.FindById(id));
     } catch (error) {
         res.status(500).send({message: "Internal server error",error});
     }
@@ -52,7 +58,13 @@ const ReportEmployeeFindById = async (req: CustomRequest, res: Response) => {
 const SendsReportEmployeeFindById = async (req: CustomRequest, res: Response) => {
     try {
         const id = `${process.env.ID_ADMIN}`;
-        res.status(200).send(await ReportEmployeeService.FindByIdSends(id!));
+
+        if(!id){
+            res.send(404).send({message: 'id null'});
+            return;      
+        }
+
+        res.status(200).send(await ReportEmployeeService.FindByIdSends(id));
     } catch (error) {
         res.status(500).send({message: "Internal server error",error});
     }
