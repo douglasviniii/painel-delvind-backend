@@ -10,13 +10,18 @@ const CreateTask = async (req: CustomRequest, res: Response) => {
     try {
         const {title, description, date} = req.body;
 
-        const formattedDate = new Date(`${date}T00:00:00`);
+        const formattedDate = new Date(date);
+        const utcDate = new Date(Date.UTC(
+            formattedDate.getFullYear(),
+            formattedDate.getMonth(),
+            formattedDate.getDate()
+        ));
 
         await TaskService.Create({
             employee_id: req.userid,
             title,
             description,
-            date: formattedDate,
+            date: utcDate,
             status: 'pending'
         });
         res.status(200).send({message: 'Task created'});
