@@ -8,8 +8,9 @@ router.post('/create', EmployeeMiddleware, ReportEmployeeController.CreateReport
 router.post('/send/:id', EmployeeMiddleware, ReportEmployeeController.SendReportEmployee);
 router.get('/find',EmployeeMiddleware, ReportEmployeeController.ReportEmployeeFindById);
 router.get('/findsends', ReportEmployeeController.SendsReportEmployeeFindById);
+router.get('/findsendsemployee',EmployeeMiddleware,ReportEmployeeController.SendsReportEmployeeFindByIdEmployee);
 router.patch('/update/:id', ReportEmployeeController.UpdateReportEmployee);
 router.delete('/delete/:id', ReportEmployeeController.DeleteReportEmployee);
 router.delete('/deletesends/:id', ReportEmployeeController.DeleteReportSendsEmployee);
 
-export default router;
+export default router; 

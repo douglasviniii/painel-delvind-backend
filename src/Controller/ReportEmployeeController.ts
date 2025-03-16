@@ -70,6 +70,19 @@ const SendsReportEmployeeFindById = async (req: CustomRequest, res: Response) =>
     }
 }
 
+const SendsReportEmployeeFindByIdEmployee = async (req: CustomRequest, res: Response) => {
+    try {
+        const id = req.userid;
+        if(!id){
+            res.send(404).send({message: 'id null'});
+            return;      
+        }
+        res.status(200).send(await ReportEmployeeService.FindByIdSendsEmployee(id));
+    } catch (error) {
+        res.status(500).send({message: "Internal server error",error});
+    }
+}
+
 const DeleteReportEmployee = async (req: CustomRequest, res: Response) => {
     try {
         const id = req.params.id;
@@ -105,5 +118,6 @@ export default {
     SendsReportEmployeeFindById,
     DeleteReportEmployee,
     DeleteReportSendsEmployee,
-    UpdateReportEmployee
+    UpdateReportEmployee,
+    SendsReportEmployeeFindByIdEmployee
 };
