@@ -14,7 +14,6 @@ import TeamRoute from './Routes/TeamRoute';
 import PaymentRoute from './Routes/PaymentRoute';
 import BudgetRoute from './Routes/BudgetRoute';
 
-
 dotenv.config();
 
 const app = express();
