@@ -6,6 +6,7 @@ const ReportEmployeeSchema = new mongoose.Schema({
     author: {type: String, required: true},
     content: {type: String, required: true},
     date: {type: Date, required: true},
+    status: {type: String, default: 'Production'},
 })
 
 const ReportEmployeeModel = mongoose.model("ReportEmployee", ReportEmployeeSchema);

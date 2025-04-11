@@ -34,7 +34,8 @@ const SendReportEmployee = async (req: CustomRequest, res: Response) => {
         admin_id: `${process.env.ID_ADMIN}`,
         report_id: id,
     })); 
-        
+
+        await ReportEmployeeService.Update(id, {status: 'Sended'})
     } catch (error) {
         res.status(500).json({message: 'Internal server error',error});
     }
